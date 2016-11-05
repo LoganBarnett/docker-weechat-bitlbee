@@ -20,7 +20,7 @@ RUN apt-get install \
   -y
 RUN ln -sf /usr/share/zoneinfo/PST8PDT /etc/localtime
 
-ADD bitlbee.conf /etc/bitlbee/bitlbee.conf
+# ADD bitlbee.conf /etc/bitlbee/bitlbee.conf
 
 ADD run.sh /run.sh
 RUN chmod +x /run.sh
