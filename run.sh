@@ -33,14 +33,15 @@ adduser --uid $WEECHAT_UID --gid $WEECHAT_GID $WEECHAT_USER --home $WEECHAT_HOME
 if [[ $IRC_SERVER == "localhost" ]]; then
     mkdir -p $WEECHAT_HOME/bitlbee
     chmod 700 $WEECHAT_HOME/bitlbee
-    chown -R ${WEECHAT_USER}.${WEECHAT_USER} $WEECHAT_HOME/bitlbee
+    chown -R ${WEECHAT_USER}:${WEECHAT_USER} $WEECHAT_HOME/bitlbee
 fi
 
-chown ${WEECHAT_USER}.${WEECHAT_USER} $WEECHAT_HOME
+chown ${WEECHAT_USER}:${WEECHAT_USER} $WEECHAT_HOME
 
 if [[ $IRC_SERVER == "localhost" ]]; then
     echo "Starting bitblee."
     su - $WEECHAT_USER -c "/usr/sbin/bitlbee"
+    /usr/sbin/bitlbee
 
     echo "Waiting for bitblee to start."
     sleep 2
@@ -56,6 +57,7 @@ else
 fi
 
 su - $WEECHAT_USER -c "LC_ALL=en_US.utf8 weechat $SERVER_ARG"
+LC_ALL=en_US.utf8 weechat $SERVER_ARG
 
 if [[ $IRC_SERVER == "localhost" ]]; then
     echo "Killing bitblee."
